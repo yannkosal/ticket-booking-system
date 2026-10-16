@@ -6,12 +6,14 @@ import com.example.kosal.inventoryservice.repository.EventRepository;
 import com.example.kosal.inventoryservice.repository.VenueRepository;
 import com.example.kosal.inventoryservice.response.EventInventoryResponse;
 import com.example.kosal.inventoryservice.response.VenueInventoryResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class InventoryService {
 
@@ -48,4 +50,22 @@ public class InventoryService {
                 .build();
     }
 
+    public EventInventoryResponse getEventInventory(final Long eventId) {
+        final Event event = eventRepository.findById(eventId).orElse(null);
+
+        return EventInventoryResponse.builder()
+                .event(event.getName())
+                .capacity(event.getLeft_capacity())
+                .venue(event.getVenue())
+                .ticketPrice(event.getTicketPrice())
+                .eventId(event.getId())
+                .build();
+    }
+
+    public void updateEventCapacity(final Long eventId, final Long ticketBooked) {
+        final Event event = eventRepository.findById(eventId).orElse(null);
+        event.setLeft_capacity(event.getLeft_capacity() - ticketBooked);
+        eventRepository.saveAndFlush(event);
+        log.info("Update event capacity for event id: {} with ticket booked: {}", event, ticketBooked);
+    }
 }
