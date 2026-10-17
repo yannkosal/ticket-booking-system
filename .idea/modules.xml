@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/bookingservice/bookingservice.iml" filepath="$PROJECT_DIR$/bookingservice/bookingservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/inventoryservice/inventoryservice.iml" filepath="$PROJECT_DIR$/inventoryservice/inventoryservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ticket-booking-system.iml" filepath="$PROJECT_DIR$/.idea/ticket-booking-system.iml" />
     </modules>
   </component>
